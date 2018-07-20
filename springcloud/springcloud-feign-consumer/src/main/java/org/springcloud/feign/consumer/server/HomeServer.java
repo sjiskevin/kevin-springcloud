@@ -1,12 +1,13 @@
 package org.springcloud.feign.consumer.server;
 
-import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springcloud.feign.consumer.server.hystrix.HomeServerHystrix;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import feign.RequestLine;
-
-@FeignClient("eureka-provider")
+@FeignClient(value = "eureka-provider", fallback = HomeServerHystrix.class)
 public interface HomeServer {
 
-	@RequestLine("GET /")
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String consumer();
 }

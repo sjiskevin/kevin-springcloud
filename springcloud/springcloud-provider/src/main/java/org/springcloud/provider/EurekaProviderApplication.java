@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -15,7 +16,7 @@ public class EurekaProviderApplication {
 	@Value("${server.port}")
 	private String port;
 
-	@RequestMapping("/")
+	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public String home() {
 		return "Hello world,port:" + port;
 	}

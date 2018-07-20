@@ -2,18 +2,18 @@ package org.springcloud.ribbon.consumer.controller;
 
 import javax.annotation.Resource;
 
+import org.springcloud.ribbon.consumer.server.HomeServer;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 @RestController
 public class ConsumerController {
 
 	@Resource
-	private RestTemplate restTemplate;
+	private HomeServer homeServer;
 
 	@GetMapping(value = "/hello")
 	public String hello() {
-		return restTemplate.getForEntity("http://eureka-provider/", String.class).getBody();
+		return homeServer.homeService();
 	}
 }
